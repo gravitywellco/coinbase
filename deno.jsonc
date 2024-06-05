@@ -1,0 +1,16 @@
+{
+  "name": "@gravity/coinbase",
+  "version": "0.0.0",
+  "exports": "./mod.ts",
+  "tasks": {},
+  "imports": {},
+  "lint": {
+    "exclude": [".dist"]
+  },
+  "fmt": {
+    "exclude": [".dist"],
+    "lineWidth": 100,
+    "singleQuote": true,
+    "semiColons": false
+  }
+}
