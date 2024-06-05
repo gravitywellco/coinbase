@@ -7,6 +7,7 @@ A fully typed client for interacting with the
 ## Progress
 
 REST [Documentation](https://docs.cdp.coinbase.com/exchange/reference/)
+
 - [ ] Auth
 - [ ] Accounts
 - [ ] Address Book
@@ -26,6 +27,7 @@ REST [Documentation](https://docs.cdp.coinbase.com/exchange/reference/)
 - [ ] Wrapped Assets
 
 WebSocket Channels [Documentation](https://docs.cdp.coinbase.com/exchange/docs/websocket-channels/)
+
 - [ ] Auth
 - [ ] Heartbeat
 - [ ] Status
