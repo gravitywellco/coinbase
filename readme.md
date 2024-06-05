@@ -4,6 +4,9 @@ A fully typed client for interacting with the
 [Coinbase Exchange](https://www.coinbase.com/developer-platform/products/exchange-api)
 (institutional) rest/websocket apis.
 
+The public API may change before v1. Breaking changes will effect minor versions. Pinning to a patch
+version is fine for non-breaking changes.
+
 ## Progress
 
 REST [Documentation](https://docs.cdp.coinbase.com/exchange/reference/)
@@ -13,7 +16,7 @@ REST [Documentation](https://docs.cdp.coinbase.com/exchange/reference/)
 - [ ] Address Book
 - [ ] Coinbase Accounts
 - [ ] Conversions
-- [ ] Currencies
+- [x] Currencies
 - [ ] Transfers
 - [ ] Fees
 - [ ] Orders

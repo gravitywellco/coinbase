@@ -4,7 +4,6 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-export { Coinbase } from './coinbase.ts'
-
-export type { CoinbaseOptions } from './options/options.types.ts'
-export type { CoinbaseCurrency } from './resources/currencies/currencies.types.ts'
+export interface CoinbaseOptions {
+  api_url?: string
+}
