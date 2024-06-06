@@ -13,7 +13,7 @@ export abstract class CoinbaseResource {
   constructor(
     protected readonly options: CoinbaseOptions,
     protected readonly path: string,
-    auth: boolean = false
+    auth: boolean = false,
   ) {
     this.request = new CoinbaseRequest(this.path, this.options, auth)
   }
