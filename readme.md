@@ -23,7 +23,7 @@ REST [Documentation](https://docs.cdp.coinbase.com/exchange/reference/)
 - [ ] Loans
 - [ ] Coinbase Price Oracle
 - [ ] Products
-- [ ] Profiles
+- [x] Profiles
 - [ ] Reports
 - [ ] Travel Rules
 - [ ] Users
