@@ -11,7 +11,7 @@ version is fine for non-breaking changes.
 
 REST [Documentation](https://docs.cdp.coinbase.com/exchange/reference/)
 
-- [ ] Auth
+- [x] Auth
 - [ ] Accounts
 - [ ] Address Book
 - [ ] Coinbase Accounts
@@ -31,7 +31,7 @@ REST [Documentation](https://docs.cdp.coinbase.com/exchange/reference/)
 
 WebSocket Channels [Documentation](https://docs.cdp.coinbase.com/exchange/docs/websocket-channels/)
 
-- [ ] Auth
+- [x] Auth
 - [ ] Heartbeat
 - [ ] Status
 - [ ] Auction
