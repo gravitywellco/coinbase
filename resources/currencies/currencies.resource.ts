@@ -6,14 +6,11 @@
 
 import type { CoinbaseCurrency } from './currencies.types.ts'
 import type { CoinbaseOptions } from '../../utilities/options.types.ts'
-import { CoinbaseRequest } from '../request.ts'
+import { CoinbaseResource } from '../resource.ts'
 
-export class CoinbaseCurrencies {
-  private readonly path = '/currencies'
-  private readonly request: CoinbaseRequest
-
-  constructor(private readonly options: CoinbaseOptions) {
-    this.request = new CoinbaseRequest(this.path, this.options)
+export class CoinbaseCurrencies extends CoinbaseResource {
+  constructor(options: CoinbaseOptions) {
+    super(options, '/currencies')
   }
 
   public async all(): Promise<CoinbaseCurrency[]> {
