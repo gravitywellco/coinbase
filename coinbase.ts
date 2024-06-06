@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import type { CoinbaseOptions } from './options/options.types.ts'
+import type { CoinbaseOptions } from './utilities/options.types.ts'
 import { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
 
 export class Coinbase {
