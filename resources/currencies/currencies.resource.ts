@@ -5,7 +5,7 @@
  */
 
 import type { CoinbaseCurrency } from './currencies.types.ts'
-import type { CoinbaseOptions } from '../../options/options.types.ts'
+import type { CoinbaseOptions } from '../../utilities/options.types.ts'
 import { CoinbaseRequest } from '../request.ts'
 
 export class CoinbaseCurrencies {

@@ -5,5 +5,12 @@
  */
 
 export interface CoinbaseOptions {
+  auth?: CoinbaseAuthOptions
   api_url?: string
+}
+
+export interface CoinbaseAuthOptions {
+  key: string
+  secret: string
+  passphrase: string
 }

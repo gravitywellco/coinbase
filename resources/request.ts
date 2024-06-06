@@ -4,30 +4,45 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import type { CoinbaseOptions } from '../options/options.types.ts'
+import { CoinbaseAuth } from '../utilities/auth.utility.ts'
+import type { CoinbaseOptions } from '../utilities/options.types.ts'
 
 /**
  * Coinbase API request class.
  */
 export class CoinbaseRequest {
+  private readonly auth: CoinbaseAuth
   private readonly url: string
 
   /**
    * @param {string} path Subpath to an api endpoint that all requests from this instance will make.
    * @param {CoinbaseOptions} options
    */
-  constructor(path: string, options: CoinbaseOptions) {
+  constructor(
+    private readonly path: string,
+    private readonly options: CoinbaseOptions,
+    private readonly has_auth = false,
+  ) {
     const api_url = options.api_url ?? 'https://api.exchange.coinbase.com'
+    this.auth = new CoinbaseAuth(options.auth ?? { key: '', secret: '', passphrase: '' })
     this.url = `${api_url}${path}`
+  }
+
+  private async headers(
+    path: string,
+    method: string,
+    body: unknown | undefined = undefined,
+  ): Promise<HeadersInit> {
+    return Object.assign({}, {
+      'Content-Type': 'application/json',
+      'User-Agent': 'gravity/coinbase',
+    }, this.has_auth ? await this.auth.keys(`${this.path}${path}`, method, body, true) : {})
   }
 
   public async get<T>(path = ''): Promise<T> {
     const response = await fetch(`${this.url}${path}`, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'User-Agent': 'gravity/coinbase',
-      },
+      headers: await this.headers(path, 'GET'),
     })
     if (!response.ok) throw new Error(response.statusText)
     return (await response.json()) as T

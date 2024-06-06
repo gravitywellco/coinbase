@@ -6,5 +6,7 @@
 
 export { Coinbase } from './coinbase.ts'
 
-export type { CoinbaseOptions } from './options/options.types.ts'
-export type { CoinbaseCurrency } from './resources/currencies/currencies.types.ts'
+export type { CoinbaseAuthOptions, CoinbaseOptions } from './utilities/options.types.ts'
+
+export type { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
+export type * from './resources/currencies/currencies.types.ts'
