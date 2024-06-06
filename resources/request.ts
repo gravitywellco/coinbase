@@ -6,6 +6,7 @@
 
 import { CoinbaseAuth } from '../utilities/auth.utility.ts'
 import type { CoinbaseOptions } from '../utilities/options.types.ts'
+import { type Query, RequestUtility } from '../utilities/request.utility.ts'
 
 /**
  * Coinbase API request class.
@@ -39,12 +40,45 @@ export class CoinbaseRequest {
     }, this.has_auth ? await this.auth.keys(`${this.path}${path}`, method, body, true) : {})
   }
 
-  public async get<T>(path = ''): Promise<T> {
+  public async get<T>(path = '', query: Query = []): Promise<T> {
+    if (query.length) path += RequestUtility.ParseQuery(query)
     const response = await fetch(`${this.url}${path}`, {
       method: 'GET',
       headers: await this.headers(path, 'GET'),
     })
     if (!response.ok) throw new Error(response.statusText)
-    return (await response.json()) as T
+    try {
+      return await response.json() as T
+    } catch (_error) {
+      return response.body as T
+    }
+  }
+
+  public async post<T>(body: Record<string, unknown>, path = ''): Promise<T> {
+    const response = await fetch(`${this.url}${path}`, {
+      method: 'POST',
+      headers: await this.headers(path, 'POST', body),
+      body: JSON.stringify(body),
+    })
+    if (!response.ok) throw new Error(response.statusText)
+    try {
+      return await response.json() as T
+    } catch (_error) {
+      return response.body as T
+    }
+  }
+
+  public async put<T>(body: Record<string, unknown>, path = ''): Promise<T> {
+    const response = await fetch(`${this.url}${path}`, {
+      method: 'PUT',
+      headers: await this.headers(path, 'PUT', body),
+      body: JSON.stringify(body),
+    })
+    if (!response.ok) throw new Error(response.statusText)
+    try {
+      return await response.json() as T
+    } catch (_error) {
+      return response.body as T
+    }
   }
 }

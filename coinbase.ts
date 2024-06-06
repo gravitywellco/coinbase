@@ -6,11 +6,14 @@
 
 import type { CoinbaseOptions } from './utilities/options.types.ts'
 import { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
+import { CoinbaseProfiles } from './resources/profiles/profiles.resource.ts'
 
 export class Coinbase {
   public readonly currencies: CoinbaseCurrencies
+  public readonly profiles: CoinbaseProfiles
 
   constructor(options: CoinbaseOptions = {}) {
     this.currencies = new CoinbaseCurrencies(options)
+    this.profiles = new CoinbaseProfiles(options)
   }
 }

@@ -10,3 +10,6 @@ export type { CoinbaseAuthOptions, CoinbaseOptions } from './utilities/options.t
 
 export type { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
 export type * from './resources/currencies/currencies.types.ts'
+
+export type { CoinbaseProfiles } from './resources/profiles/profiles.resource.ts'
+export type * from './resources/profiles/profiles.types.ts'
