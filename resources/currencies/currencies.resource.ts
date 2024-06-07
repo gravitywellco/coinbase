@@ -13,10 +13,21 @@ export class CoinbaseCurrencies extends CoinbaseResource {
     super(options, '/currencies')
   }
 
+  /**
+   * Gets a list of all known currencies. Note: Not all currencies may be currently in use for trading.
+   * See: https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getcurrencies/
+   * @returns {Promise<CoinbaseCurrency[]>}
+   */
   public async all(): Promise<CoinbaseCurrency[]> {
     return await this.request.get<CoinbaseCurrency[]>()
   }
 
+  /**
+   * Gets a single currency by id.
+   * See: https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getcurrency/
+   * @param {string} id ID of the currency
+   * @returns {Promise<CoinbaseCurrency>}
+   */
   public async get(id: string): Promise<CoinbaseCurrency> {
     return await this.request.get<CoinbaseCurrency>(`/${id}`)
   }
