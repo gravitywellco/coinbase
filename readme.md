@@ -1,5 +1,7 @@
 # Gravitywell / Coinbase
 
+[![continuous integration](https://github.com/gravitywellco/coinbase/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/gravitywellco/coinbase/actions/workflows/continuous-integration.yml)
+
 **WARNING**: The NPM package is in a super alpha state while I work out the nuance in publishing to
 both JSR and NPM. Prefer installation through JSR if possible:
 [@gravity/coinbase](https://jsr.io/@gravity/coinbase)
