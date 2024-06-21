@@ -1,8 +1,15 @@
 # Gravitywell / Coinbase
 
+**WARNING**: The NPM package is in a super alpha state while I work out the nuance in publishing to
+both JSR and NPM. Prefer installation through JSR if possible:
+[@gravity/coinbase](https://jsr.io/@gravity/coinbase)
+
 A fully typed client for interacting with the
 [Coinbase Exchange](https://www.coinbase.com/developer-platform/products/exchange-api)
 (institutional) rest/websocket apis.
+
+Intended for use in server environments with deno/bun. Built in TypeScript and does not export a
+vanilla JavaScript bundle or definition files.
 
 The public API may change before v1. Breaking changes will effect minor versions. Pinning to a patch
 version is fine for non-breaking changes.

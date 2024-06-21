@@ -5,7 +5,9 @@ coverage
 .dist
 
 # misc
+node_modules
 .DS_Store
+.npmrc
 *.pem
 
 # env
