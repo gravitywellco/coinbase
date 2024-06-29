@@ -81,6 +81,6 @@ export class CoinbaseProfiles extends CoinbaseResource {
    * @returns {Promise<void>}
    */
   public async transfer(from: string, to: string, currency: string, amount: string): Promise<void> {
-    return await this.request.post({ from, to, currency, amount }, `/profiles/transfer`)
+    return await this.request.post({ from, to, currency, amount }, `/transfer`)
   }
 }
