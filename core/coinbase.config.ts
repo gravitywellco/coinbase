@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { CoinbaseAuthConfig, CoinbaseUrlConfig } from './coinbase.config.types.ts'
+import type { CoinbaseAuthConfig, CoinbaseUrlConfig } from './coinbase.config.types.ts'
 
 /**
  * Configuration for the Coinbase API, internal module.
@@ -22,7 +22,7 @@ export class CoinbaseConfig {
 
     this.urls = {
       api: `https://${sandbox ? 'api-public.sandbox' : 'api'}.${this.root_url}`,
-      wss: `wss://${sandbox ? 'ws-direct.sandbox' : 'ws-direct'}.${this.root_url}`
+      wss: `wss://${sandbox ? 'ws-direct.sandbox' : 'ws-direct'}.${this.root_url}`,
     }
   }
 }

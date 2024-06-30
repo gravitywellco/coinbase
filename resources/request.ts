@@ -6,7 +6,7 @@
 
 import { CoinbaseAuth } from '../utilities/auth.utility.ts'
 import { type Query, RequestUtility } from '../utilities/request.utility.ts'
-import { CoinbaseConfig } from '../core/coinbase.config.ts'
+import type { CoinbaseConfig } from '../core/coinbase.config.ts'
 
 /**
  * Coinbase API request class.

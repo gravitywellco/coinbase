@@ -6,7 +6,7 @@
 
 import type { CoinbaseCurrency } from './currencies.types.ts'
 import { CoinbaseResource } from '../resource.ts'
-import { CoinbaseConfig } from '../../core/coinbase.config.ts'
+import type { CoinbaseConfig } from '../../core/coinbase.config.ts'
 
 export class CoinbaseCurrencies extends CoinbaseResource {
   constructor(config: CoinbaseConfig) {
