@@ -41,6 +41,7 @@ jobs:
         with:
           deno-version: v1.x
       - run: deno task coverage
+      - run: deno task coverage:lcov
       - name: codecov
         uses: codecov/codecov-action@v4.0.1
         with:
