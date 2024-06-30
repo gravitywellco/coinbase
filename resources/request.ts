@@ -5,8 +5,8 @@
  */
 
 import { CoinbaseAuth } from '../utilities/auth.utility.ts'
-import type { CoinbaseOptions } from '../utilities/options.types.ts'
 import { type Query, RequestUtility } from '../utilities/request.utility.ts'
+import { CoinbaseConfig } from '../core/coinbase.config.ts'
 
 /**
  * Coinbase API request class.
@@ -16,17 +16,17 @@ export class CoinbaseRequest {
   private readonly url: string
 
   /**
+   * @param {CoinbaseConfig} config Configuration object for the Coinbase API.
    * @param {string} path Subpath to an api endpoint that all requests from this instance will make.
-   * @param {CoinbaseOptions} options
+   * @param {boolean} has_auth Whether or not this request instance requires authentication.
    */
   constructor(
+    config: CoinbaseConfig,
     private readonly path: string,
-    private readonly options: CoinbaseOptions,
     private readonly has_auth = false,
   ) {
-    const api_url = options.api_url ?? 'https://api.exchange.coinbase.com'
-    this.auth = new CoinbaseAuth(options.auth ?? { key: '', secret: '', passphrase: '' })
-    this.url = `${api_url}${path}`
+    this.auth = new CoinbaseAuth(config.auth)
+    this.url = `${config.urls.api}${path}`
   }
 
   private async headers(
@@ -37,7 +37,7 @@ export class CoinbaseRequest {
     return Object.assign({}, {
       'Content-Type': 'application/json',
       'User-Agent': 'gravity/coinbase',
-    }, this.has_auth ? await this.auth.keys(`${this.path}${path}`, method, body, true) : {})
+    }, this.has_auth ? await this.auth.headers(`${this.path}${path}`, method, body) : {})
   }
 
   public async get<T>(path = '', query: Query = []): Promise<T> {
