@@ -20,6 +20,7 @@ Deno.test('CoinbaseCore', async (test) => {
     const auth_options = { key: 'key', secret: 'secret', passphrase: 'pass' }
     const core = new CoinbaseCore({ auth: auth_options })
     assertEquals(core.authenticated, true)
+    assertEquals(core.config.auth, auth_options)
   })
 
   await test.step('correct internals with no auth options set', () => {

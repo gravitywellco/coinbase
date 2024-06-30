@@ -14,7 +14,7 @@ export class CoinbaseCore {
   public readonly auth: CoinbaseAuth
 
   constructor(options?: CoinbaseOptions) {
-    const { auth, sandbox } = options || {}
+    const { auth, sandbox } = options ?? {}
     if (auth) this.authenticated = true
     this.config = new CoinbaseConfig(auth, sandbox)
     this.auth = new CoinbaseAuth(this.config.auth)
