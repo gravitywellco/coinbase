@@ -5,12 +5,12 @@
  */
 
 import type { CoinbaseCurrency } from './currencies.types.ts'
+import type { CoinbaseCore } from '../../core/coinbase.core.ts'
 import { CoinbaseResource } from '../resource.ts'
-import type { CoinbaseConfig } from '../../core/coinbase.config.ts'
 
 export class CoinbaseCurrencies extends CoinbaseResource {
-  constructor(config: CoinbaseConfig) {
-    super(config, '/currencies')
+  constructor(core: CoinbaseCore) {
+    super(core, '/currencies')
   }
 
   /**
@@ -19,7 +19,7 @@ export class CoinbaseCurrencies extends CoinbaseResource {
    * @returns {Promise<CoinbaseCurrency[]>}
    */
   public async all(): Promise<CoinbaseCurrency[]> {
-    return await this.request.get<CoinbaseCurrency[]>()
+    return await this._get<CoinbaseCurrency[]>()
   }
 
   /**
@@ -29,6 +29,6 @@ export class CoinbaseCurrencies extends CoinbaseResource {
    * @returns {Promise<CoinbaseCurrency>}
    */
   public async get(id: string): Promise<CoinbaseCurrency> {
-    return await this.request.get<CoinbaseCurrency>(`/${id}`)
+    return await this._get<CoinbaseCurrency>(`/${id}`)
   }
 }

@@ -5,12 +5,12 @@
  */
 
 import type { CoinbaseProfile } from './profiles.types.ts'
-import type { CoinbaseConfig } from '../../core/coinbase.config.ts'
+import type { CoinbaseCore } from '../../core/coinbase.core.ts'
 import { CoinbaseResource } from '../resource.ts'
 
 export class CoinbaseProfiles extends CoinbaseResource {
-  constructor(config: CoinbaseConfig) {
-    super(config, '/profiles', true)
+  constructor(core: CoinbaseCore) {
+    super(core, '/profiles', true)
   }
 
   /**
@@ -22,7 +22,7 @@ export class CoinbaseProfiles extends CoinbaseResource {
    */
   public async all(active?: boolean): Promise<CoinbaseProfile[]> {
     const query = active !== undefined ? [{ key: 'active', value: active }] : []
-    return await this.request.get<CoinbaseProfile[]>(undefined, query)
+    return await this._get<CoinbaseProfile[]>(undefined, query)
   }
 
   /**
@@ -35,7 +35,7 @@ export class CoinbaseProfiles extends CoinbaseResource {
    */
   public async get(id: string, active?: boolean): Promise<CoinbaseProfile> {
     const query = active !== undefined ? [{ key: 'active', value: active }] : []
-    return await this.request.get<CoinbaseProfile>(`/${id}`, query)
+    return await this._get<CoinbaseProfile>(`/${id}`, query)
   }
 
   /**
@@ -45,7 +45,7 @@ export class CoinbaseProfiles extends CoinbaseResource {
    * @returns {Promise<CoinbaseProfile>}
    */
   public async create(name?: string): Promise<CoinbaseProfile> {
-    return await this.request.post<CoinbaseProfile>({ name })
+    return await this._post<CoinbaseProfile>({ name })
   }
 
   /**
@@ -56,7 +56,7 @@ export class CoinbaseProfiles extends CoinbaseResource {
    * @returns {Promise<CoinbaseProfile>}
    */
   public async rename(id: string, name?: string): Promise<CoinbaseProfile> {
-    return await this.request.put<CoinbaseProfile>({ profile_id: id, name }, `/${id}`)
+    return await this._put<CoinbaseProfile>({ profile_id: id, name }, `/${id}`)
   }
 
   /**
@@ -67,7 +67,7 @@ export class CoinbaseProfiles extends CoinbaseResource {
    * @returns {Promise<void>}
    */
   public async delete(id: string, to?: string): Promise<void> {
-    return await this.request.put({ profile_id: id, to }, `/${id}/deactivate`)
+    return await this._put({ profile_id: id, to }, `/${id}/deactivate`)
   }
 
   /**
@@ -81,6 +81,6 @@ export class CoinbaseProfiles extends CoinbaseResource {
    * @returns {Promise<void>}
    */
   public async transfer(from: string, to: string, currency: string, amount: string): Promise<void> {
-    return await this.request.post({ from, to, currency, amount }, `/transfer`)
+    return await this._post({ from, to, currency, amount }, `/transfer`)
   }
 }
