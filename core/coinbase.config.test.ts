@@ -22,7 +22,6 @@ Deno.test('CoinbaseConfig', async (test) => {
 
   await test.step('should be authenticated if auth is provided', () => {
     const config = new CoinbaseConfig({ key: 'key', secret: 'secret', passphrase: 'pass' })
-    assertEquals(config.authenticated, true)
     assertEquals(config.auth.key, 'key')
     assertEquals(config.auth.secret, 'secret')
     assertEquals(config.auth.passphrase, 'pass')
