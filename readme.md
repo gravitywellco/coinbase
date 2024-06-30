@@ -2,6 +2,7 @@
 
 [![JSR](https://jsr.io/badges/@gravity/coinbase)](https://jsr.io/@gravity/coinbase)
 [![continuous integration](https://github.com/gravitywellco/coinbase/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/gravitywellco/coinbase/actions/workflows/continuous-integration.yml)
+[![codecov](https://codecov.io/gh/gravitywellco/coinbase/graph/badge.svg?token=5B0P33NTE0)](https://codecov.io/gh/gravitywellco/coinbase)
 
 **WARNING**: The NPM package has been yanked. Use through JSR:
 [@gravity/coinbase](https://jsr.io/@gravity/coinbase)
