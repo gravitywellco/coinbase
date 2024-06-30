@@ -4,17 +4,17 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import type { CoinbaseOptions } from '../utilities/options.types.ts'
+import type { CoinbaseConfig } from '../core/coinbase.config.ts'
 import { CoinbaseRequest } from './request.ts'
 
 export abstract class CoinbaseResource {
   protected readonly request: CoinbaseRequest
 
   constructor(
-    protected readonly options: CoinbaseOptions,
+    protected readonly config: CoinbaseConfig,
     protected readonly path: string,
     auth: boolean = false,
   ) {
-    this.request = new CoinbaseRequest(this.path, this.options, auth)
+    this.request = new CoinbaseRequest(this.config, this.path, auth)
   }
 }
