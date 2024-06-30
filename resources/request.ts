@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { CoinbaseAuth } from '../utilities/auth.utility.ts'
+import { CoinbaseAuth } from '../core/coinbase.auth.ts'
 import { type Query, RequestUtility } from '../utilities/request.utility.ts'
 import type { CoinbaseConfig } from '../core/coinbase.config.ts'
 

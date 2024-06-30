@@ -4,7 +4,8 @@
   "exports": "./mod.ts",
   "tasks": {
     "coverage": "deno test --coverage=coverage",
-    "coverage:lcov": "deno coverage --lcov --output=coverage/lcov.info"
+    "coverage:lcov": "deno coverage --lcov --output=coverage/lcov.info",
+    "coverage:html": "deno coverage coverage --html"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@^0.226.0",

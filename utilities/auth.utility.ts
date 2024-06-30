@@ -4,89 +4,58 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { decodeBase64 as decode, encodeBase64 as encode } from '@std/encoding'
-import type { CoinbaseAuthConfig } from '../core/coinbase.config.types.ts'
+import { decodeBase64 } from '@std/encoding'
 
-export interface CoinbaseAuthKeys {
-  key: string
-  passphrase: string
-  signature: string
-  timestamp: string
-}
-
-export interface CoinbaseAuthHeaders {
-  'CB-ACCESS-KEY': string
-  'CB-ACCESS-PASSPHRASE': string
-  'CB-ACCESS-SIGN': string
-  'CB-ACCESS-TIMESTAMP': string
-}
+const HASH_CONFIG = { name: 'HMAC', hash: 'SHA-256' }
 
 /**
- * Coinbase API authentication utility. Internal use only.
+ * Simple utility for hashing and signing messages, useful for coinbase
+ * authentication and makes testing simpler.
+ * @access package-private
  */
-export class CoinbaseAuth {
-  constructor(private readonly config: CoinbaseAuthConfig) {}
-
-  public async generate_key(
+export class AuthUtility {
+  /**
+   * Generates a new signing key from a secret with HMAC SHA-256.
+   * @param {string} secret - The secret to generate the key from.
+   * @param {KeyUsage} permission - The permission to give the key.
+   * @returns {Promise<CryptoKey>} The generated key.
+   */
+  public static async CreateSigningKey(
     secret: string,
-    permission: 'sign' | 'verify' = 'sign',
+    permission: KeyUsage = 'sign',
   ): Promise<CryptoKey> {
-    const decoded_secret = decode(secret)
-    const hash_data = { name: 'HMAC', hash: 'SHA-256' }
-    return await crypto.subtle.importKey('raw', decoded_secret, hash_data, false, [permission])
-  }
-
-  public async sign(message: string, key: CryptoKey): Promise<ArrayBuffer> {
-    return await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(message))
-  }
-
-  public async verify(message: string, signature: ArrayBuffer, key: CryptoKey): Promise<boolean> {
-    return await crypto.subtle.verify('HMAC', key, signature, new TextEncoder().encode(message))
+    return await crypto.subtle.importKey('raw', decodeBase64(secret), HASH_CONFIG, false, [
+      permission,
+    ])
   }
 
   /**
-   * Returns Coinbase API authentication data, used in requests.
-   * @param {string} path Full path to the API endpoint.
-   * @param {string} method HTTP method.
-   * @param {unknown} body Any body, if applicable. Will be stringified.
-   * @returns {Promise<CoinbaseAuthKeys>} Authentication headers.
+   * Signs a message with a generated key using HMAC SHA-256.
+   * @param {string} message - The message to sign.
+   * @param {CryptoKey} key - The key to sign the message with.
+   * @returns {Promise<ArrayBuffer>} The signature.
    */
-  public async get(
-    path: string,
-    method: string,
-    body: unknown | undefined = undefined,
-  ): Promise<CoinbaseAuthKeys> {
-    const timestamp = `${Date.now() / 1000}`
-    const message = `${timestamp}${method}${path}${body === undefined ? '' : JSON.stringify(body)}`
-    const key = await this.generate_key(this.config.secret)
-    const signature = await this.sign(message, key)
-
-    return {
-      key: this.config.key,
-      passphrase: this.config.passphrase,
-      signature: encode(signature),
-      timestamp,
-    }
+  public static async Sign(message: string, key: CryptoKey): Promise<ArrayBuffer> {
+    return await crypto.subtle.sign(HASH_CONFIG.name, key, new TextEncoder().encode(message))
   }
 
   /**
-   * Returns Coinbase API authentication headers, used in requests.
-   * @param {string} path Full path to the API endpoint.
-   * @param {string} method HTTP method.
-   * @param {unknown} body Any body, if applicable. Will be stringified.
-   * @returns {Promise<CoinbaseAuthHeaders>} Authentication headers.
+   * Verifies a message with a signature and key using HMAC SHA-256. Mostly used for testing.
+   * @param {string} message - The message to verify.
+   * @param {ArrayBuffer} signature - The signature to verify.
+   * @param {CryptoKey} key - The key to verify the signature with.
+   * @returns {Promise<boolean>} Whether the signature is valid.
    */
-  public async headers(
-    path: string,
-    method: string,
-    body: unknown | undefined = undefined,
-  ): Promise<CoinbaseAuthHeaders> {
-    const auth = await this.get(path, method, body)
-    return {
-      'CB-ACCESS-KEY': auth.key,
-      'CB-ACCESS-PASSPHRASE': auth.passphrase,
-      'CB-ACCESS-SIGN': auth.signature,
-      'CB-ACCESS-TIMESTAMP': auth.timestamp,
-    }
+  public static async Verify(
+    message: string,
+    signature: ArrayBuffer,
+    key: CryptoKey,
+  ): Promise<boolean> {
+    return await crypto.subtle.verify(
+      HASH_CONFIG.name,
+      key,
+      signature,
+      new TextEncoder().encode(message),
+    )
   }
 }
