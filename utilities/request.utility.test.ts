@@ -15,3 +15,11 @@ Deno.test('RequestUtility.ParseQuery', () => {
     '?test=value&test2=value2',
   )
 })
+
+Deno.test('RequestUtility.ParseResponse', async () => {
+  const response = new Response('{"test": "value"}')
+  assertEquals(await RequestUtility.ParseResponse(response), { test: 'value' })
+
+  const text_response = new Response('text')
+  assertEquals(await RequestUtility.ParseResponse(text_response), 'text')
+})
