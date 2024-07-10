@@ -19,7 +19,7 @@ export class CoinbaseCurrencies extends CoinbaseResource {
    * @returns {Promise<CoinbaseCurrency[]>}
    */
   public async all(): Promise<CoinbaseCurrency[]> {
-    return await this._get<CoinbaseCurrency[]>()
+    return await this.request.get<CoinbaseCurrency[]>()
   }
 
   /**
@@ -29,6 +29,6 @@ export class CoinbaseCurrencies extends CoinbaseResource {
    * @returns {Promise<CoinbaseCurrency>}
    */
   public async get(id: string): Promise<CoinbaseCurrency> {
-    return await this._get<CoinbaseCurrency>(`/${id}`)
+    return await this.request.get<CoinbaseCurrency>(`/${id}`)
   }
 }
