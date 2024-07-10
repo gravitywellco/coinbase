@@ -3,9 +3,9 @@
   "packages": {
     "specifiers": {
       "jsr:@std/assert@^0.226.0": "jsr:@std/assert@0.226.0",
-      "jsr:@std/dotenv@^0.224.2": "jsr:@std/dotenv@0.224.2",
       "jsr:@std/encoding@^0.224.3": "jsr:@std/encoding@0.224.3",
-      "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.0"
+      "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.0",
+      "npm:dotenv@^16.4.5": "npm:dotenv@16.4.5"
     },
     "jsr": {
       "@std/assert@0.226.0": {
@@ -14,14 +14,17 @@
           "jsr:@std/internal@^1.0.0"
         ]
       },
-      "@std/dotenv@0.224.2": {
-        "integrity": "29081695357e4534696c9e986b2560be29c141ccf52daa32b6c20ff5b5c64ab9"
-      },
       "@std/encoding@0.224.3": {
         "integrity": "5e861b6d81be5359fad4155e591acf17c0207b595112d1840998bb9f476dbdaf"
       },
       "@std/internal@1.0.0": {
         "integrity": "ac6a6dfebf838582c4b4f61a6907374e27e05bedb6ce276e0f1608fe84e7cd9a"
+      }
+    },
+    "npm": {
+      "dotenv@16.4.5": {
+        "integrity": "sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==",
+        "dependencies": {}
       }
     }
   },
@@ -29,8 +32,8 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@^0.226.0",
-      "jsr:@std/dotenv@^0.224.2",
-      "jsr:@std/encoding@^0.224.3"
+      "jsr:@std/encoding@^0.224.3",
+      "npm:dotenv@^16.4.5"
     ]
   }
 }

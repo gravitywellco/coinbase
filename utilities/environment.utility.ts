@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import '@std/dotenv/load'
+import 'dotenv/config'
 
 /**
  * Unfortunatly, Deno and Bun have different ways of handling environment variables
