@@ -5,9 +5,6 @@
 [![codecov](https://codecov.io/gh/gravitywellco/coinbase/graph/badge.svg?token=5B0P33NTE0)](https://codecov.io/gh/gravitywellco/coinbase)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a939968d38d9b125f678/maintainability)](https://codeclimate.com/github/gravitywellco/coinbase/maintainability)
 
-**WARNING**: The NPM package has been yanked. Use through JSR:
-[@gravity/coinbase](https://jsr.io/@gravity/coinbase)
-
 A fully typed client for interacting with the
 [Coinbase Exchange](https://www.coinbase.com/developer-platform/products/exchange-api)
 (institutional) rest/websocket apis.
