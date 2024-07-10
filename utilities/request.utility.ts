@@ -4,8 +4,6 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { CoinbaseCore } from '../core/coinbase.core.ts'
-
 export type Query = QueryParam[]
 export interface QueryParam extends Record<string, string | number | boolean> {}
 export enum RequestMethod {

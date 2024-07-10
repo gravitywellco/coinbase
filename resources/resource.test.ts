@@ -4,14 +4,14 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { CoinbaseResource } from './resource.ts'
-import { CoinbaseCore } from '../core/coinbase.core.ts'
-import { assertArrayIncludes, assertEquals, assertInstanceOf } from '@std/assert'
+// import { CoinbaseResource } from './resource.ts'
+// import type { CoinbaseCore } from '../core/coinbase.core.ts'
+// import type { assertArrayIncludes, assertEquals, assertInstanceOf } from '@std/assert'
 
-class TestResource extends CoinbaseResource {
-  constructor(core: CoinbaseCore, has_auth: boolean = false) {
-    super(core, '/testing', has_auth)
-  }
-}
+// class TestResource extends CoinbaseResource {
+//   constructor(core: CoinbaseCore, has_auth: boolean = false) {
+//     super(core, '/testing', has_auth)
+//   }
+// }
 
-Deno.test('CoinbaseResource', async (test) => {})
+Deno.test('CoinbaseResource', async () => {})

@@ -4,8 +4,8 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { type Query, RequestUtility, RequestMethod } from '../utilities/request.utility.ts'
-import { CoinbaseCore } from './coinbase.core.ts'
+import { type Query, RequestMethod, RequestUtility } from '../utilities/request.utility.ts'
+import type { CoinbaseCore } from './coinbase.core.ts'
 
 /**
  * Coinbase API request class.
@@ -31,11 +31,13 @@ export class CoinbaseRequest {
     method: string,
     body: unknown | undefined = undefined,
   ): Promise<HeadersInit> {
-    const auth = this.has_auth ? await this.core.auth.headers(`${this.path}${path}`, method, body) : {}
+    const auth = this.has_auth
+      ? await this.core.auth.headers(`${this.path}${path}`, method, body)
+      : {}
     return {
       'Content-Type': 'application/json',
       'User-Agent': 'gravity/coinbase',
-      ...auth
+      ...auth,
     }
   }
 
