@@ -5,15 +5,43 @@
 [![codecov](https://codecov.io/gh/gravitywellco/coinbase/graph/badge.svg?token=5B0P33NTE0)](https://codecov.io/gh/gravitywellco/coinbase)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a939968d38d9b125f678/maintainability)](https://codeclimate.com/github/gravitywellco/coinbase/maintainability)
 
-A fully typed client for interacting with the
 [Coinbase Exchange](https://www.coinbase.com/developer-platform/products/exchange-api)
-(institutional) rest/websocket apis.
+(institutional) client, written in TypeScript for Deno/Bun.
 
-Intended for use in server environments with deno/bun. Built in TypeScript and **does not export a
-vanilla JavaScript bundle or definition files**.
+Currently, the only dependencies are `@std/encoding` and `npm:dotenv` but this library may evolve to
+include more helpful stuff in the future. Ergonomics and correctness are prioritized over minimal
+purity. A good example, that is being considered, is `npm:decimal.js`.
 
-The public API may change before v1. Breaking changes will effect minor versions. Pinning to a patch
-version is fine for non-breaking changes.
+**WARNING:** The public API may change before v1. Breaking changes will effect minor versions.
+Pinning to a patch version is fine for non-breaking changes.
+
+## Installation
+
+Deno: `deno add @gravity/coinbase`
+
+Bun: `bunx jsr add @gravity/coinbase`
+
+## Usage
+
+Note that this package does not export a JS bundle or TypeScript definition files. It is intended to
+be used in environments that can use TypeScript natively; such as Deno and Bun. **There is no
+planned support for bundling or other environments.**
+
+```typescript
+import { Coinbase } from '@gravity/coinbase'
+
+/**
+ * Initialization will automatically pick up auth variables set in the
+ * environment (through a `.env` file or otherwise) based on these keys:
+ * `COINBASE_API_KEY`, `COINBASE_API_SECRET`, `COINBASE_API_PASSPHRASE`
+ *
+ * Supplying a configuration manually will override any environment configs.
+ */
+const coinbase = new Coinbase()
+
+// Use resources to interact with the REST API.
+const currencies = await coinbase.currencies.all()
+```
 
 ## REST Progress ([Documentation](https://docs.cdp.coinbase.com/exchange/reference/))
 
