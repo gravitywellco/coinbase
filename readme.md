@@ -50,8 +50,8 @@ const currencies = await coinbase.currencies.all()
 | **Auth** ([Reference](https://docs.cdp.coinbase.com/exchange/docs/rest-auth/))                                                           |     ✅ |
 | **Errors** ([Reference](https://docs.cdp.coinbase.com/exchange/docs/rest-requests/))                                                     |        |
 | **Accounts**                                                                                                                             |        |
-| --- [Get all accounts for a profile](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounts/)                      |        |
-| --- [Get a single account by id](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccount/)                           |        |
+| --- [Get all accounts for a profile](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounts/)                      |     ✅ |
+| --- [Get a single account by id](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccount/)                           |     ✅ |
 | --- [Get a single account's holds](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccountholds/)                    |        |
 | --- [Get a single account's ledger](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccountledger/)                  |        |
 | --- [Get a single account's transfers](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getaccounttransfers/)            |        |
