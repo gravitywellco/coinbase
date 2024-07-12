@@ -13,7 +13,7 @@ const HASH_CONFIG = { name: 'HMAC', hash: 'SHA-256' }
  * authentication and makes testing simpler.
  * @access package-private
  */
-export class AuthUtility {
+export class CryptographyUtility {
   /**
    * Generates a new signing key from a secret with HMAC SHA-256.
    * @param {string} secret - The secret to generate the key from.

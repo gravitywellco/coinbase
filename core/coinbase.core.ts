@@ -5,8 +5,8 @@
  */
 
 import type { CoinbaseOptions } from './coinbase.config.types.ts'
+import { auth, type CoinbaseAuth } from './auth/auth.ts'
 import { CoinbaseConfig } from './coinbase.config.ts'
-import { CoinbaseAuth } from './coinbase.auth.ts'
 
 export class CoinbaseCore {
   public readonly authenticated: boolean = false
@@ -14,9 +14,9 @@ export class CoinbaseCore {
   public readonly auth: CoinbaseAuth
 
   constructor(options?: CoinbaseOptions) {
-    const { auth, sandbox } = options ?? {}
-    if (auth) this.authenticated = true
-    this.config = new CoinbaseConfig(auth, sandbox)
-    this.auth = new CoinbaseAuth(this.config.auth)
+    const { auth: auth_options, sandbox } = options ?? {}
+    if (auth_options) this.authenticated = true
+    this.config = new CoinbaseConfig(auth_options, sandbox)
+    this.auth = auth
   }
 }

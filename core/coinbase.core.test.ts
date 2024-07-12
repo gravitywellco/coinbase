@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { CoinbaseAuth } from './coinbase.auth.ts'
+import { auth } from './auth/auth.ts'
 import { CoinbaseConfig } from './coinbase.config.ts'
 import { CoinbaseCore } from './coinbase.core.ts'
 import { assertEquals, assertInstanceOf } from '@std/assert'
@@ -13,7 +13,7 @@ Deno.test('CoinbaseCore', async (test) => {
   await test.step('sets internal config and auth', () => {
     const core = new CoinbaseCore()
     assertInstanceOf(core.config, CoinbaseConfig)
-    assertInstanceOf(core.auth, CoinbaseAuth)
+    assertEquals(core.auth, auth)
   })
 
   await test.step('correct internals with auth options set', () => {
