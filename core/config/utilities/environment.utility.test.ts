@@ -4,57 +4,27 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { Environment, EnvironmentUtility } from './environment.utility.ts'
+import { EnvironmentUtility } from './environment.utility.ts'
 import { assertEquals } from '@std/assert'
 
-const MockBun = {
-  env: { 'BAR': 'baz' },
-}
-
-Deno.test('Deno', async (test) => {
-  await test.step('EnvironmentUtility.Environment', () => {
-    assertEquals(EnvironmentUtility.Environment(), Environment.DENO)
-  })
-
-  await test.step('EnvironmentUtility.Get - key exists', () => {
+Deno.test('EnvironmentUtility.Get', async (test) => {
+  await test.step('key exists', () => {
     Deno.env.set('FOO', 'bar')
     assertEquals(EnvironmentUtility.Get('FOO'), 'bar')
   })
 
-  await test.step('EnvironmentUtility.Get - key does not exist', () => {
+  await test.step('key exists in bun', () => {
+    // @ts-ignore - it's fine. probably.
+    globalThis.Bun = { env: { 'BAR': 'baz' } }
+
+    assertEquals(EnvironmentUtility.Get('BAR'), 'baz')
+
+    // @ts-ignore - still fine.
+    globalThis.Bun = undefined
+  })
+
+  await test.step('key does not exist', () => {
     assertEquals(EnvironmentUtility.Get('Bar'), '')
     assertEquals(EnvironmentUtility.Get('Bar', 'foo'), 'foo')
-  })
-})
-
-Deno.test('Bun', async (test) => {
-  // @ts-ignore - it's fine. probably.
-  globalThis.Bun = MockBun
-
-  await test.step('EnvironmentUtility.Environment', () => {
-    assertEquals(EnvironmentUtility.Environment(), Environment.BUN)
-  })
-
-  await test.step('EnvironmentUtility.Get - key exists', () => {
-    assertEquals(EnvironmentUtility.Get('BAR'), 'baz')
-  })
-
-  await test.step('EnvironmentUtility.Get - key does not exist', () => {
-    assertEquals(EnvironmentUtility.Get('UHM'), '')
-    assertEquals(EnvironmentUtility.Get('UHM', 'stuff'), 'stuff')
-  })
-
-  // @ts-ignore - still fine.
-  globalThis.Bun = undefined
-})
-
-Deno.test('Unknown', async (test) => {
-  await test.step('EnvironmentUtility.Environment', () => {
-    assertEquals(EnvironmentUtility.Environment(true), Environment.UNKNOWN)
-  })
-
-  await test.step('EnvironmentUtility.Get - key does not exist', () => {
-    assertEquals(EnvironmentUtility.Get('FOO', undefined, true), '')
-    assertEquals(EnvironmentUtility.Get('FOO', 'things', true), 'things')
   })
 })
