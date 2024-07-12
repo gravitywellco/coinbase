@@ -4,8 +4,9 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { EnvironmentUtility } from '../utilities/environment.utility.ts'
-import type { CoinbaseAuthConfig, CoinbaseUrlConfig } from './coinbase.config.types.ts'
+import { EnvironmentUtility } from './utilities/environment.utility.ts'
+import type { CoinbaseUrlConfig } from './coinbase.config.types.ts'
+import type { CoinbaseAuthConfig } from './auth/auth.ts'
 
 /**
  * Configuration for the Coinbase API, internal module.

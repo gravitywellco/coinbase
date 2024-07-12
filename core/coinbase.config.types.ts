@@ -4,17 +4,12 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+import type { CoinbaseAuthConfig } from './auth/auth.ts'
+
 /** Publicly exposed options to configure the Coinbase client. */
 export interface CoinbaseOptions {
   auth?: CoinbaseAuthConfig
   sandbox?: boolean
-}
-
-/** Authentication configuration for Coinbase, required for most uses. */
-export interface CoinbaseAuthConfig {
-  key: string
-  secret: string
-  passphrase: string
 }
 
 /** URL configuration for Coinbase, can be production or sandbox. */
