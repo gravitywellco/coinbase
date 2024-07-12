@@ -5,7 +5,7 @@
  */
 
 import { assertEquals, assertInstanceOf } from '@std/assert'
-import { TEST_AUTH_CONFIG } from '../testing/auth.test.data.ts'
+import { TEST_AUTH_CONFIG } from '../../testing/core.test.data.ts'
 import { CryptographyUtility } from './cryptography.utility.ts'
 
 Deno.test('CryptographyUtility.CreateSigningKey', async (test) => {

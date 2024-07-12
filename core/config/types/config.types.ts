@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import type { CoinbaseAuthConfig } from './auth/auth.ts'
+import type { CoinbaseAuthConfig } from '../../auth/auth.ts'
 
 /** Publicly exposed options to configure the Coinbase client. */
 export interface CoinbaseOptions {
@@ -16,4 +16,10 @@ export interface CoinbaseOptions {
 export interface CoinbaseUrlConfig {
   api: string
   wss: string
+}
+
+/** Configuration for the Coinbase client. */
+export interface CoinbaseConfig {
+  auth: CoinbaseAuthConfig
+  urls: CoinbaseUrlConfig
 }
