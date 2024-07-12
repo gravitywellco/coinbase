@@ -5,14 +5,14 @@
  */
 
 import { auth } from './auth/auth.ts'
-import { CoinbaseConfig } from './coinbase.config.ts'
+import { get_config } from './config/config.ts'
 import { CoinbaseCore } from './coinbase.core.ts'
-import { assertEquals, assertInstanceOf } from '@std/assert'
+import { assertEquals } from '@std/assert'
 
 Deno.test('CoinbaseCore', async (test) => {
   await test.step('sets internal config and auth', () => {
     const core = new CoinbaseCore()
-    assertInstanceOf(core.config, CoinbaseConfig)
+    assertEquals(core.config, get_config())
     assertEquals(core.auth, auth)
   })
 

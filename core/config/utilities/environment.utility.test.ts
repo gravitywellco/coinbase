@@ -7,25 +7,23 @@
 import { EnvironmentUtility } from './environment.utility.ts'
 import { assertEquals } from '@std/assert'
 
-Deno.test('EnvironmentUtility.IsDeno', async (test) => {
-  await test.step('returns true when running in Deno', () => {
-    assertEquals(EnvironmentUtility.IsDeno(), true)
-  })
-})
-
-Deno.test('EnvironmentUtility.IsBun', async (test) => {
-  await test.step('returns false when running in Deno', () => {
-    assertEquals(EnvironmentUtility.IsBun(), false)
-  })
-})
-
 Deno.test('EnvironmentUtility.Get', async (test) => {
-  await test.step('returns a key if it exists', () => {
+  await test.step('key exists', () => {
     Deno.env.set('FOO', 'bar')
     assertEquals(EnvironmentUtility.Get('FOO'), 'bar')
   })
 
-  await test.step('returns a default value if the key does not exist', () => {
+  await test.step('key exists in bun', () => {
+    // @ts-ignore - it's fine. probably.
+    globalThis.Bun = { env: { 'BAR': 'baz' } }
+
+    assertEquals(EnvironmentUtility.Get('BAR'), 'baz')
+
+    // @ts-ignore - still fine.
+    globalThis.Bun = undefined
+  })
+
+  await test.step('key does not exist', () => {
     assertEquals(EnvironmentUtility.Get('Bar'), '')
     assertEquals(EnvironmentUtility.Get('Bar', 'foo'), 'foo')
   })

@@ -5,7 +5,7 @@
  */
 
 import { assertAlmostEquals, assertEquals } from '@std/assert'
-import { TEST_AUTH_CONFIG } from '../testing/auth.test.data.ts'
+import { TEST_AUTH_CONFIG } from '../../testing/core.test.data.ts'
 import { decodeBase64 } from '@std/encoding'
 import type { CoinbaseAuthKeys } from '../types/auth.types.ts'
 import { CryptographyUtility } from '../utilities/cryptography.utility.ts'

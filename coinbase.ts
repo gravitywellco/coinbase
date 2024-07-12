@@ -5,7 +5,7 @@
  */
 
 import { CoinbaseCore } from './core/coinbase.core.ts'
-import type { CoinbaseOptions } from './core/coinbase.config.types.ts'
+import type { CoinbaseOptions } from './core/config/config.ts'
 import { CoinbaseAccounts } from './resources/accounts/accounts.resource.ts'
 import { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
 import { CoinbaseProfiles } from './resources/profiles/profiles.resource.ts'

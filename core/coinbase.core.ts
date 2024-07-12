@@ -4,9 +4,8 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import type { CoinbaseOptions } from './coinbase.config.types.ts'
+import { type CoinbaseConfig, type CoinbaseOptions, get_config } from './config/config.ts'
 import { auth, type CoinbaseAuth } from './auth/auth.ts'
-import { CoinbaseConfig } from './coinbase.config.ts'
 
 export class CoinbaseCore {
   public readonly authenticated: boolean = false
@@ -14,9 +13,8 @@ export class CoinbaseCore {
   public readonly auth: CoinbaseAuth
 
   constructor(options?: CoinbaseOptions) {
-    const { auth: auth_options, sandbox } = options ?? {}
-    if (auth_options) this.authenticated = true
-    this.config = new CoinbaseConfig(auth_options, sandbox)
+    if (options?.auth) this.authenticated = true
+    this.config = get_config(options)
     this.auth = auth
   }
 }
