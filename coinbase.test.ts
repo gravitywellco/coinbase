@@ -4,8 +4,11 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { Coinbase } from './mod.ts'
-import { assertEquals } from '@std/assert'
+import { Coinbase } from './coinbase.ts'
+import { assertInstanceOf } from '@std/assert'
+import { CoinbaseAccounts } from './resources/accounts/accounts.resource.ts'
+import { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
+import { CoinbaseProfiles } from './resources/profiles/profiles.resource.ts'
 
 /**
  * This test is almost entirely here to ensure full module gets included in
@@ -13,6 +16,7 @@ import { assertEquals } from '@std/assert'
  */
 Deno.test('Coinbase', () => {
   const coinbase = new Coinbase()
-  assertEquals(coinbase.currencies, coinbase.currencies)
-  assertEquals(coinbase.profiles, coinbase.profiles)
+  assertInstanceOf(coinbase.accounts, CoinbaseAccounts)
+  assertInstanceOf(coinbase.currencies, CoinbaseCurrencies)
+  assertInstanceOf(coinbase.profiles, CoinbaseProfiles)
 })
