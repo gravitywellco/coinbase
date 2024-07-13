@@ -5,12 +5,12 @@
  */
 
 import type { CoinbaseAccount } from './accounts.types.ts'
-import type { CoinbaseCore } from '../../core/coinbase.core.ts'
+import type { CoinbaseConfig } from '../../core/config/config.ts'
 import { CoinbaseResource } from '../resource.ts'
 
 export class CoinbaseAccounts extends CoinbaseResource {
-  constructor(core: CoinbaseCore) {
-    super(core, '/accounts', true)
+  constructor(config: CoinbaseConfig) {
+    super(config, '/accounts', true)
   }
 
   /**

@@ -5,12 +5,12 @@
  */
 
 import type { CoinbaseCurrency } from './currencies.types.ts'
-import type { CoinbaseCore } from '../../core/coinbase.core.ts'
+import type { CoinbaseConfig } from '../../core/config/config.ts'
 import { CoinbaseResource } from '../resource.ts'
 
 export class CoinbaseCurrencies extends CoinbaseResource {
-  constructor(core: CoinbaseCore) {
-    super(core, '/currencies')
+  constructor(config: CoinbaseConfig) {
+    super(config, '/currencies')
   }
 
   /**
