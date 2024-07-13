@@ -5,12 +5,12 @@
  */
 
 import type { CoinbaseProfile } from './profiles.types.ts'
-import type { CoinbaseCore } from '../../core/coinbase.core.ts'
+import type { CoinbaseConfig } from '../../core/config/config.ts'
 import { CoinbaseResource } from '../resource.ts'
 
 export class CoinbaseProfiles extends CoinbaseResource {
-  constructor(core: CoinbaseCore) {
-    super(core, '/profiles', true)
+  constructor(config: CoinbaseConfig) {
+    super(config, '/profiles', true)
   }
 
   /**

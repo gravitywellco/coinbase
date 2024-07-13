@@ -5,7 +5,8 @@
  */
 
 import { Coinbase } from './coinbase.ts'
-import { assertInstanceOf } from '@std/assert'
+import { get_config } from './core/config/config.ts'
+import { assertEquals, assertInstanceOf } from '@std/assert'
 import { CoinbaseAccounts } from './resources/accounts/accounts.resource.ts'
 import { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
 import { CoinbaseProfiles } from './resources/profiles/profiles.resource.ts'
@@ -19,4 +20,17 @@ Deno.test('Coinbase', () => {
   assertInstanceOf(coinbase.accounts, CoinbaseAccounts)
   assertInstanceOf(coinbase.currencies, CoinbaseCurrencies)
   assertInstanceOf(coinbase.profiles, CoinbaseProfiles)
+})
+
+Deno.test('Coinbase.constructor()', async (test) => {
+  await test.step('sets internal config', () => {
+    const coinbase = new Coinbase()
+    assertEquals(coinbase.config, get_config())
+  })
+
+  await test.step('correct internals with auth options set', () => {
+    const auth_options = { key: 'key', secret: 'secret', passphrase: 'pass' }
+    const coinbase = new Coinbase({ auth: auth_options })
+    assertEquals(coinbase.config, get_config({ auth: auth_options }))
+  })
 })
