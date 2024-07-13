@@ -6,6 +6,7 @@
 
 export type Query = QueryParam[]
 export interface QueryParam extends Record<string, string | number | boolean> {}
+
 export enum RequestMethod {
   GET = 'GET',
   POST = 'POST',
@@ -13,17 +14,9 @@ export enum RequestMethod {
   DELETE = 'DELETE',
 }
 
-export class RequestUtility {
-  public static ParseQuery(query: Query): string {
-    return query.length ? '?' + query.map((q) => `${q.key}=${q.value}`).join('&') : ''
-  }
-
-  public static async ParseResponse<T>(response: Response): Promise<T> {
-    try {
-      const clone = response.clone()
-      return await clone.json() as T
-    } catch (_error) {
-      return await response.text() as T
-    }
-  }
+export interface RequestData {
+  path: string
+  query?: Query
+  // deno-lint-ignore no-explicit-any
+  body?: Record<string, any>
 }

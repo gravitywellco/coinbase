@@ -5,10 +5,10 @@
  */
 
 import type { CoinbaseCore } from '../core/coinbase.core.ts'
-import { CoinbaseRequest } from '../core/coinbase.request.ts'
+import { CoinbaseRest } from '../core/rest/rest.ts'
 
 export abstract class CoinbaseResource {
-  protected readonly request: CoinbaseRequest
+  protected readonly request: CoinbaseRest
 
   /**
    * @param core Core instance that this request instance will use.
@@ -16,6 +16,8 @@ export abstract class CoinbaseResource {
    * @param has_auth Whether or not this request instance requires authentication.
    */
   constructor(core: CoinbaseCore, path: string, has_auth: boolean = false) {
-    this.request = new CoinbaseRequest(core, path, has_auth)
+    const base_url = core.config.urls.api + path
+    const auth = has_auth ? core.config.auth : undefined
+    this.request = new CoinbaseRest(base_url, auth)
   }
 }

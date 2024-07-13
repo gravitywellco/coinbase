@@ -5,7 +5,7 @@
  */
 
 import { assertEquals } from '@std/assert'
-import { TEST_AUTH_KEYS } from '../testing/auth.test.data.ts'
+import { TEST_AUTH_KEYS } from '../../testing/core.test.data.ts'
 import { get_auth_headers } from './get-auth-headers.ts'
 
 Deno.test('auth:get_auth_headers - returns the correct headers', () => {
