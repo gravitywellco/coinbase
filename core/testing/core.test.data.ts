@@ -9,3 +9,10 @@ export const TEST_AUTH_CONFIG = {
   secret: 'dGVzdF9zZWNyZXQ=',
   passphrase: 'test_passphrase',
 }
+
+export const TEST_AUTH_KEYS = {
+  key: TEST_AUTH_CONFIG.key,
+  passphrase: TEST_AUTH_CONFIG.passphrase,
+  signature: 'encrypted_signature',
+  timestamp: `${Date.now() / 1000}`,
+}
