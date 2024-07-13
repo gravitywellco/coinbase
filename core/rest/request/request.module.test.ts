@@ -4,6 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
+import { assertRejects } from '@std/assert'
 import { assertSpyCall, stub } from '@std/testing/mock'
 import { TEST_AUTH_CONFIG, TEST_AUTH_KEYS } from '../../testing/core.test.data.ts'
 import { auth } from '../../auth/auth.ts'
@@ -53,6 +54,14 @@ Deno.test('CoinbaseRequest.Send()', async (test) => {
   })
 
   stubbed_fetch.restore()
+
+  await test.step('throws error if response is not ok', async () => {
+    const response = new Response('', { statusText: 'Bad Request', status: 400 })
+    const error_fetch = stub(globalThis, 'fetch', () => Promise.resolve(response))
+    const data: RequestData = { path: '/test/error' }
+    await assertRejects(() => CoinbaseRequest.Send(RequestMethod.GET, data), Error, 'Bad Request')
+    error_fetch.restore()
+  })
 })
 
 async function test_method(test: Deno.TestContext, method: RequestMethod, func: CallableFunction) {
