@@ -11,6 +11,8 @@ import { TEST_AUTH_CONFIG, TEST_AUTH_KEYS } from '../../testing/core.test.data.t
 import { auth } from '../../auth/auth.ts'
 import { RequestMethod } from './request.types.ts'
 
+const url = 'https://example.coinbase.com'
+
 Deno.test('RequestUtility.ParseQuery()', () => {
   assertEquals(RequestUtility.ParseQuery(), '')
   assertEquals(RequestUtility.ParseQuery([]), '')
@@ -23,7 +25,7 @@ Deno.test('RequestUtility.ParseQuery()', () => {
 
 Deno.test('RequestUtility.GetHeaders()', async (test) => {
   await test.step('returns base headers with no auth', async () => {
-    const headers = await RequestUtility.GetHeaders(RequestMethod.GET, { path: '/test' })
+    const headers = await RequestUtility.GetHeaders(RequestMethod.GET, { url, path: '/test' })
     assertEquals(headers, RequestUtility.BASE_HEADERS)
   })
 
@@ -32,7 +34,7 @@ Deno.test('RequestUtility.GetHeaders()', async (test) => {
     const auth_headers = auth.get_headers(TEST_AUTH_KEYS)
     const headers = await RequestUtility.GetHeaders(
       RequestMethod.GET,
-      { path: '/test' },
+      { url, path: '/test' },
       TEST_AUTH_CONFIG,
     )
     assertEquals(headers, { ...RequestUtility.BASE_HEADERS, ...auth_headers })

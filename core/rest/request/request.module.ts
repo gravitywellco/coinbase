@@ -12,7 +12,7 @@ import { RequestUtility } from './request.utility.ts'
 export class CoinbaseRequest {
   /** Make a request to the Coinbase API. */
   static async Send<T>(method: RequestMethod, data: RequestData, auth?: CoinbaseAuthConfig) {
-    const url = `${data.path}${RequestUtility.ParseQuery(data.query)}`
+    const url = `${data.url}${data.path}${RequestUtility.ParseQuery(data.query)}`
     const headers = await RequestUtility.GetHeaders(method, data, auth)
     const body = data.body ? JSON.stringify(data.body) : undefined
     const response = await fetch(url, { headers, method, body })

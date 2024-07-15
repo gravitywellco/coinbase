@@ -12,14 +12,16 @@ import { type RequestData, RequestMethod } from './request.types.ts'
 import { CoinbaseRequest } from './request.module.ts'
 import { RequestUtility } from './request.utility.ts'
 
+const url = 'https://example.coinbase.com'
+
 Deno.test('CoinbaseRequest.Send()', async (test) => {
   const stubbed_fetch = stub(globalThis, 'fetch', () => Promise.resolve(new Response()))
 
   await test.step('calling fetch... no auth or body', async () => {
-    const data: RequestData = { path: '/test' }
+    const data: RequestData = { url, path: '/test' }
     await CoinbaseRequest.Send(RequestMethod.GET, data)
     assertSpyCall(stubbed_fetch, 0, {
-      args: [data.path, {
+      args: [data.url + data.path, {
         method: RequestMethod.GET,
         headers: RequestUtility.BASE_HEADERS,
         body: undefined,
@@ -29,21 +31,21 @@ Deno.test('CoinbaseRequest.Send()', async (test) => {
 
   await test.step('calling fetch... with auth', async () => {
     const auth_stub = stub(auth, 'get_keys', () => Promise.resolve(TEST_AUTH_KEYS))
-    const data: RequestData = { path: '/test/auth' }
+    const data: RequestData = { url, path: '/test/auth' }
     await CoinbaseRequest.Send(RequestMethod.GET, data, TEST_AUTH_CONFIG)
     const headers = { ...RequestUtility.BASE_HEADERS, ...auth.get_headers(TEST_AUTH_KEYS) }
     assertSpyCall(stubbed_fetch, 1, {
-      args: [data.path, { method: RequestMethod.GET, headers, body: undefined }],
+      args: [data.url + data.path, { method: RequestMethod.GET, headers, body: undefined }],
     })
     auth_stub.restore()
   })
 
   await test.step('calling fetch... with body', async () => {
-    const data: RequestData = { path: '/test/body', body: { test: 'value' } }
+    const data: RequestData = { url, path: '/test/body', body: { test: 'value' } }
     await CoinbaseRequest.Send(RequestMethod.POST, data)
     assertSpyCall(stubbed_fetch, 2, {
       args: [
-        data.path,
+        data.url + data.path,
         {
           method: RequestMethod.POST,
           headers: RequestUtility.BASE_HEADERS,
@@ -58,7 +60,7 @@ Deno.test('CoinbaseRequest.Send()', async (test) => {
   await test.step('throws error if response is not ok', async () => {
     const response = new Response('', { statusText: 'Bad Request', status: 400 })
     const error_fetch = stub(globalThis, 'fetch', () => Promise.resolve(response))
-    const data: RequestData = { path: '/test/error' }
+    const data: RequestData = { url, path: '/test/error' }
     await assertRejects(() => CoinbaseRequest.Send(RequestMethod.GET, data), Error, 'Bad Request')
     error_fetch.restore()
   })
@@ -67,7 +69,7 @@ Deno.test('CoinbaseRequest.Send()', async (test) => {
 async function test_method(test: Deno.TestContext, method: RequestMethod, func: CallableFunction) {
   const request = stub(CoinbaseRequest, 'Send', () => Promise.resolve({}))
 
-  const base_data: RequestData = { path: '/test' }
+  const base_data: RequestData = { url, path: '/test' }
   await test.step(`${method} is called with the correct method`, async () => {
     await func(base_data)
     assertSpyCall(request, 0, { args: [method, { ...base_data }, undefined] })

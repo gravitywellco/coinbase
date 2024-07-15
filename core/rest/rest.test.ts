@@ -11,22 +11,25 @@ import { CoinbaseRequest } from './request/request.module.ts'
 import { CoinbaseRest } from './rest.ts'
 
 const test_url = 'https://test.coinbase.com'
+const test_path = '/test'
 
 Deno.test('CoinbaseRest.constructor()', async (test) => {
   await test.step('sets url', () => {
-    const rest = new CoinbaseRest(test_url)
-    assertEquals(rest.url, test_url)
+    const rest = new CoinbaseRest(test_url, test_path)
+    assertEquals(rest.root, test_url)
+    assertEquals(rest.base, test_path)
     assertEquals(rest.auth, undefined)
   })
 
   await test.step('sets auth', () => {
-    const rest = new CoinbaseRest(test_url, TEST_AUTH_CONFIG)
-    assertEquals(rest.url, test_url)
+    const rest = new CoinbaseRest(test_url, test_path, TEST_AUTH_CONFIG)
+    assertEquals(rest.root, test_url)
+    assertEquals(rest.base, test_path)
     assertEquals(rest.auth, TEST_AUTH_CONFIG)
   })
 })
 
-const rest = new CoinbaseRest(test_url)
+const rest = new CoinbaseRest(test_url, test_path)
 async function test_method(
   method: 'get' | 'post' | 'put' | 'delete',
   stub_method: 'Get' | 'Post' | 'Put' | 'Delete',
@@ -35,7 +38,10 @@ async function test_method(
   const request_stub = stub(CoinbaseRequest, stub_method, () => Promise.resolve({}))
   await rest[method](`/${method.toLowerCase()}-request`)
   assertSpyCall(request_stub, 0, {
-    args: [{ path: test_url + `/${method.toLowerCase()}-request`, ...other_params }, undefined],
+    args: [
+      { url: test_url, path: test_path + `/${method.toLowerCase()}-request`, ...other_params },
+      undefined,
+    ],
   })
   request_stub.restore()
 }

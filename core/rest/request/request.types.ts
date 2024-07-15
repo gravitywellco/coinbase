@@ -15,6 +15,7 @@ export enum RequestMethod {
 }
 
 export interface RequestData {
+  url: string
   path: string
   query?: Query
   // deno-lint-ignore no-explicit-any
