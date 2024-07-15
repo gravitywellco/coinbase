@@ -46,7 +46,7 @@ const currencies = await coinbase.currencies.all()
 ## REST Progress ([Documentation](https://docs.cdp.coinbase.com/exchange/reference/))
 
 | Module                                                                                                                                   | Status |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | -----: |
+| :--------------------------------------------------------------------------------------------------------------------------------------- | -----: |
 | **Auth** ([Reference](https://docs.cdp.coinbase.com/exchange/docs/rest-auth/))                                                           |     ✅ |
 | **Errors** ([Reference](https://docs.cdp.coinbase.com/exchange/docs/rest-requests/))                                                     |        |
 | **Accounts**                                                                                                                             |        |
@@ -86,9 +86,9 @@ const currencies = await coinbase.currencies.all()
 | --- [Get all fills](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getfills/)                                          |        |
 | --- [Get all orders](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorders/)                                        |        |
 | --- [Cancel all orders](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorders/)                                  |        |
-| --- [Create a new order](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders/)                                   |        |
-| --- [Get single order](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorder/)                                       |        |
-| --- [Cancel an order](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorder/)                                     |        |
+| --- [Create a new order](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_postorders/)                                   |     ✅ |
+| --- [Get single order](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getorder/)                                       |     ✅ |
+| --- [Cancel an order](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_deleteorder/)                                     |     ✅ |
 | **Loans**                                                                                                                                |        |
 | --- [List loans](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getloans/)                                             |        |
 | --- [List loan assets](https://docs.cdp.coinbase.com/exchange/reference/exchangerestapi_getloanassets/)                                  |        |
