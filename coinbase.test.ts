@@ -9,6 +9,7 @@ import { get_config } from './core/config/config.ts'
 import { assertEquals, assertInstanceOf } from '@std/assert'
 import { CoinbaseAccounts } from './resources/accounts/accounts.resource.ts'
 import { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
+import { CoinbaseOrders } from './resources/orders/orders.resource.ts'
 import { CoinbaseProfiles } from './resources/profiles/profiles.resource.ts'
 
 /**
@@ -19,6 +20,7 @@ Deno.test('Coinbase', () => {
   const coinbase = new Coinbase()
   assertInstanceOf(coinbase.accounts, CoinbaseAccounts)
   assertInstanceOf(coinbase.currencies, CoinbaseCurrencies)
+  assertInstanceOf(coinbase.orders, CoinbaseOrders)
   assertInstanceOf(coinbase.profiles, CoinbaseProfiles)
 })
 
