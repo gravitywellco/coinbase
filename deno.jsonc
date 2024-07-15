@@ -1,6 +1,6 @@
 {
   "name": "@gravity/coinbase",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "exports": "./mod.ts",
   "tasks": {
     "test": "deno test --allow-read --allow-env",
