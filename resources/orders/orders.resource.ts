@@ -53,6 +53,10 @@ export class CoinbaseOrders extends CoinbaseResource {
   ): Promise<CoinbaseOrder>
   public async create(
     dto: CoinbaseMarketOrderDTO,
+    type: CoinbaseOrderType.MARKET,
+  ): Promise<CoinbaseOrder>
+  public async create(
+    dto: CoinbaseMarketOrderDTO,
     type: CoinbaseOrderType = CoinbaseOrderType.MARKET,
   ): Promise<CoinbaseOrder> {
     return await this.request.post<CoinbaseOrder>(undefined, { ...dto, type })
