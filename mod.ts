@@ -15,5 +15,9 @@ export * from './resources/accounts/accounts.types.ts'
 export type { CoinbaseCurrencies } from './resources/currencies/currencies.resource.ts'
 export * from './resources/currencies/currencies.types.ts'
 
+export type { CoinbaseOrders } from './resources/orders/orders.resource.ts'
+export * from './resources/orders/orders.types.ts'
+export * from './resources/orders/orders.dtos.ts'
+
 export type { CoinbaseProfiles } from './resources/profiles/profiles.resource.ts'
 export * from './resources/profiles/profiles.types.ts'
