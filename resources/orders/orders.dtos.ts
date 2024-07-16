@@ -10,14 +10,12 @@ import type {
   CoinbaseOrderSide,
   CoinbaseOrderStopType,
   CoinbaseOrderTimeInForce,
-  CoinbaseOrderType,
 } from './orders.types.ts'
 
 interface CoinbaseOrderDTO extends Record<string, unknown> {
   product_id: string
   profile_id?: string
   client_oid?: string
-  type: CoinbaseOrderType
   side: CoinbaseOrderSide
   stp?: CoinbaseOrderSelfTradePrevention
 }

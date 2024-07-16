@@ -4,7 +4,7 @@
  * file, You can obtain one at https://mozilla.org/MPL/2.0/.
  */
 
-import { type CoinbaseOrder, CoinbaseOrderType } from './orders.types.ts'
+import type { CoinbaseOrder, CoinbaseOrderType } from './orders.types.ts'
 import type { CoinbaseConfig } from '../../core/config/config.ts'
 import { CoinbaseResource } from '../resource.ts'
 import type {
@@ -44,20 +44,20 @@ export class CoinbaseOrders extends CoinbaseResource {
    * @todo Add sub resources to make interacting with the order engine's rules easier.
    */
   public async create(
-    dto: CoinbaseStopOrderDTO,
     type: CoinbaseOrderType.STOP,
+    dto: CoinbaseStopOrderDTO,
   ): Promise<CoinbaseOrder>
   public async create(
-    dto: CoinbaseLimitOrderDTO,
     type: CoinbaseOrderType.LIMIT,
+    dto: CoinbaseLimitOrderDTO,
   ): Promise<CoinbaseOrder>
   public async create(
-    dto: CoinbaseMarketOrderDTO,
     type: CoinbaseOrderType.MARKET,
+    dto: CoinbaseMarketOrderDTO,
   ): Promise<CoinbaseOrder>
   public async create(
+    type: CoinbaseOrderType,
     dto: CoinbaseMarketOrderDTO,
-    type: CoinbaseOrderType = CoinbaseOrderType.MARKET,
   ): Promise<CoinbaseOrder> {
     return await this.request.post<CoinbaseOrder>(undefined, { ...dto, type })
   }
